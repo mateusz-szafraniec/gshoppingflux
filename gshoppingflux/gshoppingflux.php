@@ -34,7 +34,7 @@ class GShoppingFlux extends Module
     {
         $this->name = 'gshoppingflux';
         $this->tab = 'smart_shopping';
-        $this->version = '1.7.2';
+        $this->version = '1.7.3';
         $this->author = 'Dim00z';
 
         $this->bootstrap = true;
@@ -2200,6 +2200,7 @@ class GShoppingFlux extends Module
         foreach ($products as $product) {
             $p = new Product($product['id_product'], true, $id_lang, $id_shop, $this->context);
 
+            $attributeCombinations = null;
             $attributesResume = null;
             if ($this->module_conf['export_attributes'] == 1) {
                 $attributesResume = $p->getAttributesResume($id_lang);

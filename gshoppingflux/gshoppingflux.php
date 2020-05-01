@@ -2577,6 +2577,7 @@ class GShoppingFlux extends Module
             $xml_googleshopping .= "\t" . '<g:price>' . Tools::convertPriceFull($this->module_conf['shipping_price'], null, $currency) . ' ' . $currency->iso_code . '</g:price>' . "\n";
             $xml_googleshopping .= '</g:shipping>' . "\n";
         } elseif ($this->module_conf['shipping_mode'] == 'full' && count($this->module_conf['shipping_countries[]'])) {
+            $availableShipping = 0;
             $this->id_address_delivery = 0;
             $countries = [];
             if (in_array('all', $this->module_conf['shipping_countries[]'])) {
@@ -2652,7 +2653,11 @@ class GShoppingFlux extends Module
                     $xml_googleshopping .= "\t" . '<g:service>' . $shipping['delay'] . '</g:service>' . "\n";
                     $xml_googleshopping .= "\t" . '<g:price>' . Tools::convertPriceFull($shipping['price'], null, $currency) . ' ' . $currency->iso_code . '</g:price>' . "\n";
                     $xml_googleshopping .= '</g:shipping>' . "\n";
+                    if ($shipping['delay'] != null) {
+                      ++$availableShipping;
+                    }
                 }
+                if ($availableShipping == 0) return;
             }
         }
 

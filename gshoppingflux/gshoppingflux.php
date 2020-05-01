@@ -2461,7 +2461,7 @@ class GShoppingFlux extends Module
         }
 
         // Brand
-        if ($this->module_conf['no_brand'] != 0 && !empty($product['id_manufacturer'])) {
+        if (!empty($product['id_manufacturer'])) {
             $xml_googleshopping .= '<g:brand><![CDATA['.htmlspecialchars(Manufacturer::getNameById((int) $product['id_manufacturer']), self::REPLACE_FLAGS, self::CHARSET, false).']]></g:brand>'."\n";
             ++$identifier_exists;
         }
